@@ -25,6 +25,7 @@
         const { access_token, instance_url } = await response.json();
 
         console.log('access_token', access_token);
+        console.log('instance_url', instance_url);
 
         $Lightning.use(
           "c:ContactFormApp",
