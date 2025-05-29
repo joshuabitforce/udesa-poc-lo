@@ -1,37 +1,46 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Lightning Out Test</title>
-  <script src="https://bitforce2-dev-ed.develop.lightning.force.com/lightning/lightning.out.js"></script>
-</head>
-<body>
-  <h1>Usando Lightning Out</h1>
+  <head>
+    <title>Lightning Out Test</title>
+    <script src="https://bitforce2-dev-ed.develop.lightning.force.com/lightning/lightning.out.js"></script>
+  </head>
+  <body>
+    <h1>Usando Lightning Out</h1>
 
-  <div id="lightning-container"></div>
+    <div id="lightning-container"></div>
 
-  <script>
-    async function initLightningOut() {
-      const response = await fetch('https://7a46-186-132-47-142.ngrok-free.app/auth/salesforce')
-      const { access_token, instance_url } = await response.json()
+    <script>
+      async function initLightningOut() {
+        const response = await fetch(
+          "https://7a46-186-132-47-142.ngrok-free.app/auth/salesforce",
+          {
+            method: "GET",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        const { access_token, instance_url } = await response.json();
 
-      $Lightning.use(
-        "c:ContactFormApp",
-        () => {
-          $Lightning.createComponent(
-            "c:contactForm",
-            {},
-            "lightning-container",
-            (cmp) => {
-              console.log("Componente cargado", cmp)
-            }
-          )
-        },
-        instance_url,
-        access_token
-      )
-    }
+        $Lightning.use(
+          "c:ContactFormApp",
+          () => {
+            $Lightning.createComponent(
+              "c:contactForm",
+              {},
+              "lightning-container",
+              (cmp) => {
+                console.log("Componente cargado", cmp);
+              }
+            );
+          },
+          instance_url,
+          access_token
+        );
+      }
 
-    initLightningOut()
-  </script>
-</body>
+      initLightningOut();
+    </script>
+  </body>
 </html>
